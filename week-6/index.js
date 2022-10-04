@@ -11,4 +11,6 @@ Multiple databases are known as cluster
 
 Data are stored in BSON format
 M V C 
+Mongoose: Driver for Mongodb
+Mongodb compass: able to visualize and run things 
 */
