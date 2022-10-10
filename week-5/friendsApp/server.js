@@ -3,6 +3,7 @@ const router = require(`./src/router/friendsRouter`)
 const {logger, sayHi} = require(`./src/middleware/logger`)
 // const sayHi= require(`./src/middleware/sayHi`)
 const connectDb = require('./src/config/config')
+const {connect} = require('mongoose')
 const app = express()
 app.use(express.json())
 

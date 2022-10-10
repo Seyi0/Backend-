@@ -19,31 +19,57 @@ const createFriend = async(req, res)=>{
     res.status(201).json({success: false, message : 'operation failed'})
 }
 }
-const getFriend =(req, res)=>{
-    const id = req.params.personId
-    const onePerson = data.find((person) => person.id == id )
-    res.status(200).send(onePerson)
+const getFriend =async (req, res)=>{
+    // const id = req.params.personId
+    // const onePerson = data.find((person) => person.id == id )
+    // res.status(200).send(onePerson)
+    try{
+        const id = req.params.personId
+        const onePerson = await FriendsModel.findById(id).exec();
+        res.status(200).send(onePerson)
+    }
+    catch (error){
+        console.log(error)
+    }
 }
 
 
-const getFriends =(req, res)=>{
-    res.status(200).send(data)
+const getFriends =async (req, res)=>{
+    // res.status(200).send(data)
+    // mongoose method
+    const friends =  await FriendsModel.find({});
+res.status(200).send(friends)
 }
 
 
-const updateFriend =(req, res)=>{
-    const payLoad = req.body
+const updateFriend =async (req, res)=>{
+    // const payLoad = req.body
+    // const id = req.params.personId
+    // const onePerson = data.find((person) => person.id == id )
+    // onePerson.name = payLoad.name
+    // res.status(200).send(onePerson)
+    const filter = req.body
     const id = req.params.personId
-    const onePerson = data.find((person) => person.id == id )
-    onePerson.name = payLoad.name
-    res.status(200).send(onePerson)
+    const updatePerson = await FriendsModel.findByIdAndUpdate(id, filter) 
+    // {
+    //     returnOriginal: false
+    // }
+    res.send(updatePerson)
 }
 
-const deleteFriend =(req, res)=>{
-    const id = req.params.personId
-    const newPeople= data.filter((person) => person.id !== Number(id) )
+const deleteFriend =async (req, res)=>{
+    // const id = req.params.personId
+    // const newPeople= data.filter((person) => person.id !== Number(id) )
   
-    res.status(200).send(newPeople)
+    // res.status(200).send(newPeople)
+    try{
+        const id = req.params.personId
+    const newPeople = await FriendsModel.findByIdAndRemove(id) 
+    res.send(newPeople)
+    }
+    catch (error){
+        console.log(error)
+    }
 }
 
 const search =(req, res)=>{
