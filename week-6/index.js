@@ -10,7 +10,7 @@ multiple collections are known as database
 Multiple databases are known as cluster
 
 Data are stored in BSON format
-M V C 
+M V C : model,view,controller......
 Mongoose: Driver for Mongodb
 Mongodb compass: able to visualize and run things 
 */
