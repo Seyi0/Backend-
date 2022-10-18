@@ -1,9 +1,12 @@
 const express = require('express')
 const router = require(`./src/router/friendsRouter`)
-const {logger, sayHi} = require(`./src/middleware/logger`)
+const dotenv = require('dotenv')
+dotenv.config()
+const {logger, sayHi
+} = require(`./src/middleware/logger`)
+const connectDb = require('./src/Config/config')
+const { connect } = require('mongoose')
 // const sayHi= require(`./src/middleware/sayHi`)
-const connectDb = require('./src/config/config')
-const {connect} = require('mongoose')
 const app = express()
 app.use(express.json())
 
@@ -16,9 +19,9 @@ app.get('/', (req, res) =>{
 
 app.use(`/data`, router)
 
-connectDb()
+const port = process.env.PORT
+connectDb();
 
-app.listen(5000,async ()=>{
-    await connectDb()
+app.listen(port, ()=>{
     console.log('Server is up and running')
 })
